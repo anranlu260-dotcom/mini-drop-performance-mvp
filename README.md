@@ -162,13 +162,3 @@ python3 coverage_check.py
 
 `coverage_check.py` 统计核心业务逻辑（Store、Analyzer、perf importer、collectors）覆盖率；HTTP Server 和 Agent 长驻入口通过端到端测试验证，不纳入核心覆盖率分母。
 
-## 未完成硬项与风险
-
-按原题严格验收，当前仍有硬缺口：
-
-- eBPF 尚未在 Linux 环境真跑。
-- perf 已进入 Agent 主链路，但本机 macOS 未产生真实 Linux `perf.data` 证据。
-- Continuous Profiling 已有 session 和 window 查询 API，但还不是生产级低开销常驻采样系统。
-- 多采集器已实现 proc/perf/eBPF/synthetic 路由，但缺 py-spy 和完整权限自动探测。
-
-这些缺口不能靠文档掩盖，需要 Linux 环境和真实采集结果补证据。
