@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mini-Drop 性能诊断平台</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>Mini-Drop</h1>
+        <p>Web UI + Server + Agent + Analyzer 可运行 MVP</p>
+      </div>
+      <button id="refreshBtn">刷新</button>
+    </header>
+
+    <main>
+      <section class="panel">
+        <h2>新建采样任务</h2>
+        <form id="taskForm" class="grid-form">
+          <label>目标 PID <input name="pid" type="number" value="1" min="1" required /></label>
+          <label>采样时长秒 <input name="duration" type="number" value="8" min="1" max="300" required /></label>
+          <label>采样率 Hz <input name="sample_rate" type="number" value="1" min="1" max="50" required /></label>
+          <label>采集器
+            <select name="collector">
+              <option value="proc">proc CPU/RSS/IO</option>
+              <option value="perf">perf stack collector</option>
+              <option value="ebpf">bpftrace IO collector</option>
+              <option value="synthetic">synthetic demo</option>
+            </select>
+          </label>
+          <button type="submit">下发任务</button>
+        </form>
+      </section>
+
+      <section class="split">
+        <div class="panel">
+          <h2>Agent 列表</h2>
+          <div id="agents"></div>
+        </div>
+        <div class="panel">
+          <h2>审计日志</h2>
+          <div id="audits"></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>任务列表</h2>
+        <div id="tasks"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Continuous Sessions</h2>
+        <div id="sessions"></div>
+      </section>
+
+      <section class="panel">
+        <h2>任务详情</h2>
+        <div id="taskDetail" class="muted">选择一个任务查看分析结果。</div>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

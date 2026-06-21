@@ -1,0 +1,2 @@
+"""Mini-Drop MVP package."""
+
