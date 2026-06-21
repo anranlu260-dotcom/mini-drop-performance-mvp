@@ -1,0 +1,19 @@
+tracepoint:block:block_rq_issue
+{
+  @start[args->dev, args->sector] = nsecs;
+}
+
+tracepoint:block:block_rq_complete
+/@start[args->dev, args->sector]/
+{
+  $delta_us = (nsecs - @start[args->dev, args->sector]) / 1000;
+  @io_latency_us = hist($delta_us);
+  delete(@start[args->dev, args->sector]);
+}
+
+interval:s:5
+{
+  print(@io_latency_us);
+  clear(@io_latency_us);
+}
+
